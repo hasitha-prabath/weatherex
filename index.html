@@ -243,7 +243,7 @@ function input(){
 
     let loc = document.getElementById("txtbox1").value;
     console.log(loc)
-    let url = 'http://api.weatherapi.com/v1/current.json?key=791624151d224ee19b075200241504&q='+loc
+    let url = 'https://api.weatherapi.com/v1/current.json?key=791624151d224ee19b075200241504&q='+loc
 
     const xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET",url,true);
