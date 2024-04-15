@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" type="image/x-icon" href="https://i.pinimg.com/originals/77/0b/80/770b805d5c99c7931366c2e84e88f251.png">
+
+    <title>weather</title>
+    <script src="https://kit.fontawesome.com/174e4c5370.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <style>
+
+    *{
+      -webkit-tap-highlight-color:transparent;
+      box-sizing: border-box;
+      width: auto;
+      font-family: "Russo One", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      margin: 0;
+      padding: 0;
+      width: auto;
+      
+
+    }
+      body{
+        background-color: rgb(167, 252, 236);
+        color: rgb(24, 24, 24);
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+      }
+      .container{
+        transition: all 0.9s;
+        width: 100vw;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+      }
+
+      .app{
+        padding: 40px;
+        border-radius: 25px;
+        text-align: center;
+        width: 60%;
+        height: auto;
+        background-color: rgb(142, 116, 255);
+        box-shadow: 0 0 15px rgb(190, 160, 212);
+      }
+      .btn{
+        margin: 10px;
+        width: 100px;
+        padding: 6px;
+        background-color: rgb(213, 205, 255);
+        color: rgb(24, 24, 24);
+        transition:  0.1s;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.486);
+        border-radius: 3px;
+        border: none;
+
+      }
+
+      
+      #txtbox1{
+        border-radius: 20px;
+        border: #ffffff;
+        margin: 20px;
+        width: 60%;
+        text-align: center;
+        padding: 10px;
+        font-size: small;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.486);
+
+      }
+      h1{
+        margin: 10px;
+        color: #ffffff;
+      }
+      select{
+        text-align: center;
+        color: rgb(24, 24, 24);
+        border-radius: 3px;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.199);
+      }
+      .fa-solid.fa-temperature-low{
+        font-size: 70px;
+        color: rgb(255, 254, 233);
+        
+      }
+      label{
+        font-size: large;
+        margin: 10px;
+      }
+      #dropdown{
+        padding: 5px;
+      }
+      #p1,#p2{
+        font-size: larger;
+        color: #ffffff;
+      }
+      .output{
+        background-color:rgb(124, 95, 255) ;
+        border: 1px solid #11111127;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.082);
+        margin-top: 10px;
+        border-radius: 16px;
+        padding: 5px;
+
+      }
+      
+      @media (hover: hover) {
+        .btn:hover{
+            cursor: pointer;
+            background-color: rgb(225, 202, 255);
+            color: #111111;
+            box-shadow: 0px 0px 10px rgba(108, 36, 126, 0.37);
+            
+        }  
+    }
+    @media (hover: none) {
+      
+  }
+  @media screen and (max-width:520px) {
+    .app{
+      width: 85%;
+      padding: 25px 15px 20px 15px ;
+    }
+    label{
+      font-size: medium;
+      margin: 10px;
+    }
+    #txtbox1{
+        margin: 15px;
+        padding: 5px;
+        width: 80%;
+        color: rgb(37, 37, 37);
+        transition: all 0.3s;
+
+      }
+      .fa-solid.fa-temperature-low{
+        font-size: 50px;
+        color: rgb(255, 255, 255);
+        
+      }
+      h1{
+        font-size: 23px;
+        color: rgb(255, 255, 255);
+        
+      }
+      .output{
+        width: 100%;
+        border-radius: 15px;
+
+      }
+      #p1,#p2{
+        font-size: medium;
+        color: #ffffff;
+      }
+      
+  }
+    </style>
+  </head>
+  
+<body>
+
+<div class="container">
+  <div class="app">
+    <i class="fa-solid fa-temperature-low"></i>
+    <h1>WEATHER FORECAST</h1>
+    <div>
+      <label for="dropdown">select or type below the location</label><br>
+      <select onchange="select()" name="dropdown" id="dropdown" >
+        <option value="gampola">gampola</option>
+        <option  value="kandy">kandy</option>
+        <option value="colombo">colombo</option>
+        <option value="matara">matara</option>
+        <option value="nawalapitiya">nawalapitiya</option>
+      </select>
+
+      <div>
+        <input type="text" placeholder="INPUT THE LOCATION" id="txtbox1">
+      </div>
+    </div>
+    <button class="btn" id="btn" onclick="input()">Check</button>
+
+
+    <div id="output">
+      <p id="p1"></p>
+      <p id="p2"></p>
+      <img id="img" src="" alt="">
+
+    </div>
+  </div>
+</div>
+
+<script defer>
+  const txtbox1 = document.getElementById("txtbox1")
+  const btn = document.getElementById("btn")
+  txtbox1.value="Gampola"
+  btn.addEventListener("mousedown",function(){
+    btn.style.background = "black"
+    btn.style.color = "white"
+
+
+})
+btn.addEventListener("mouseup",function(){
+  btn.style.background = "white"
+  btn.style.color = "black"
+
+
+})
+
+btn.addEventListener("touchstart",function(){
+  btn.style.background = "black"
+  btn.style.color = "white"
+
+})
+btn.addEventListener("touchend",function(){
+  btn.style.background = "white"
+  btn.style.color = "black"
+
+
+})
+
+function removeresult(){
+  document.getElementById("p1").innerHTML = "";
+  document.getElementById("p2").innerHTML ="";
+  document.getElementById("img").src ="";
+  document.getElementById("output").classList.remove("output")
+}
+  function select(){
+    removeresult()
+    let selectedtext = document.getElementById("dropdown").value
+    document.getElementById("txtbox1").value = selectedtext
+
+    
+  }
+function input(){
+    removeresult()
+
+
+    let loc = document.getElementById("txtbox1").value;
+    console.log(loc)
+    let url = 'http://api.weatherapi.com/v1/current.json?key=791624151d224ee19b075200241504&q='+loc
+
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET",url,true);
+    xmlhttp.send();
+
+    xmlhttp.onload = function() {
+    
+      console.log(xmlhttp.responseText);
+      console.log("\n");
+      console.log(xmlhttp);
+
+
+    
+      const myObj = JSON.parse(xmlhttp.responseText);
+      try{
+      document.getElementById("p1").innerHTML = `current temperature in ${myObj.location.name}`+" "+ myObj.location.country + " is " + myObj.current.temp_c+ " celsius.";
+      document.getElementById("p2").innerHTML =`condition is ${myObj.current.condition.text}`+".";
+      document.getElementById("img").src =myObj.current.condition.icon;
+      document.getElementById("output").classList.add("output")
+
+
+    }
+    catch(e){
+      document.getElementById("p1").innerHTML = myObj.error.message;
+      document.getElementById("output").classList.add("output")
+
+    }
+    }
+}
+txtbox1.addEventListener("keypress",function key(e){
+
+  removeresult()
+  if (e.keyCode == 13 ){
+    input()
+    txtbox1.value=""
+  }
+    
+})
+
+
+</script>
+
+</body>
+</html>
