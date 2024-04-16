@@ -104,7 +104,7 @@
       .output{
         background-color:rgb(124, 95, 255) ;
         border: 1px solid #11111127;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.082);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.144);
         margin-top: 10px;
         border-radius: 16px;
         padding: 5px;
@@ -158,6 +158,9 @@
       #p1,#p2{
         font-size: medium;
         color: #ffffff;
+        
+
+
       }
       
   }
@@ -206,10 +209,10 @@
 <script defer>
   const txtbox1 = document.getElementById("txtbox1")
   const btn = document.getElementById("btn")
-  txtbox1.value="Gampola"
-  btn.addEventListener("mousedown",function(){
+  btn.addEventListener("mousedown",function(e){
     btn.style.background = "black"
     btn.style.color = "white"
+
 
 
 })
@@ -218,16 +221,20 @@ btn.addEventListener("mouseup",function(){
   btn.style.color = "black"
 
 
+
 })
 
-btn.addEventListener("touchstart",function(){
+btn.addEventListener("touchstart",function(e){
   btn.style.background = "black"
   btn.style.color = "white"
+  console.log(e)
+
 
 })
 btn.addEventListener("touchend",function(){
   btn.style.background = "white"
   btn.style.color = "black"
+
 
 
 })
@@ -253,20 +260,22 @@ function input(){
     console.log(loc)
     let url = 'https://api.weatherapi.com/v1/current.json?key=791624151d224ee19b075200241504&q='+loc
 
-    const xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET",url,true);
-    xmlhttp.send();
+    const request = new XMLHttpRequest();
+    request.open("GET",url,true);
+    request.send();
 
-    xmlhttp.onload = function() {
+    request.onload = function() {
     
-      console.log(xmlhttp.responseText);
+      console.log(request.responseText);
       console.log("\n");
-      console.log(xmlhttp);
+      console.log(request);
 
 
     
-      const myObj = JSON.parse(xmlhttp.responseText);
+      const myObj = JSON.parse(request.responseText);
       try{
+      document.getElementById("p1").style.color = "#ffffff";
+      document.getElementById("p2").style.color = "#ffffff";
       document.getElementById("p1").innerHTML = `current temperature in ${myObj.location.name}`+" "+ myObj.location.country + " is " + myObj.current.temp_c+ " celsius.";
       document.getElementById("p2").innerHTML =`condition is ${myObj.current.condition.text}`+".";
       document.getElementById("img").src =myObj.current.condition.icon;
@@ -275,8 +284,18 @@ function input(){
 
     }
     catch(e){
+      if(myObj.error.code==1003){
+
+        document.getElementById("p1").innerHTML = "Please enter the location";
+        document.getElementById("p1").style.color = "rgb(175 0 0)";
+
+      }
+
+     else{
+      document.getElementById("p1").style.color = "rgb(175 0 0)";
       document.getElementById("p1").innerHTML = myObj.error.message;
       document.getElementById("output").classList.add("output")
+      } 
 
     }
     }
